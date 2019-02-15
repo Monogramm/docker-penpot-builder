@@ -44,7 +44,7 @@ WORKDIR /home/uxbox
 
 ENV NODE_VERSION=7.7.1
 
-COPY ./scripts/lein /home/uxbox/.local/bin/lein
+COPY lein /home/uxbox/.local/bin/lein
 RUN set -ex; \
     git clone https://github.com/creationix/nvm.git .nvm; \
     bash -c "source .nvm/nvm.sh && nvm install $NODE_VERSION"; \
