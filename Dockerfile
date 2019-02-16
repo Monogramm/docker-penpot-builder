@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM ubuntu:bionic
 LABEL maintainer="mathieu.brunot at monogramm dot io"
 
 RUN set -ex; \
@@ -13,13 +13,11 @@ RUN set -ex; \
     apt-get install -yq \
         bash \
         git \
-        vim \
         openjdk-8-jdk \
         rlwrap \
         build-essential \
         imagemagick \
         webp \
-        sudo \
     ; \
     mkdir -p /etc/resolvconf/resolv.conf.d; \
     echo "nameserver 8.8.8.8" > /etc/resolvconf/resolv.conf.d/tail; \
@@ -33,7 +31,7 @@ RUN set -ex; \
     ; \
     git clone https://github.com/ImageMagick/ImageMagick.git imagemagick && \
     cd imagemagick && \
-    git checkout -f 7.0.5-0 && \
+    git checkout -f 7.0.8-27 && \
     ./configure --prefix=/opt/img && \
     make -j2 && \
     make install && \
@@ -42,7 +40,7 @@ RUN set -ex; \
 
 WORKDIR /home/uxbox
 
-ENV NODE_VERSION=7.7.1
+ENV NODE_VERSION=8.15.0
 
 COPY lein /home/uxbox/.local/bin/lein
 RUN set -ex; \
