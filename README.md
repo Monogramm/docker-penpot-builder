@@ -4,8 +4,9 @@
 
 [![License: AGPL v3][uri_license_image]][uri_license]
 [![Build Status](https://travis-ci.org/Monogramm/docker-uxbox-builder.svg)](https://travis-ci.org/Monogramm/docker-uxbox-builder)
-[![Docker Automated buid](https://img.shields.io/docker/build/monogramm/docker-uxbox-builder.svg)](https://hub.docker.com/r/monogramm/docker-uxbox-builder/)
+[![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/monogramm/docker-uxbox-builder.svg)](https://hub.docker.com/r/monogramm/docker-uxbox-builder/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/monogramm/docker-uxbox-builder.svg)](https://hub.docker.com/r/monogramm/docker-uxbox-builder/)
+[![Docker layers](https://images.microbadger.com/badges/image/monogramm/docker-uxbox-builder.svg)](https://microbadger.com/images/monogramm/docker-uxbox-builder)
 
 # UXBOX docker builder
 
