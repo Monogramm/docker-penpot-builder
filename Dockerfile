@@ -56,6 +56,6 @@ RUN set -ex; \
     bash -c "/home/uxbox/.local/bin/lein version"
 
 # add node and npm to path so the commands are available
-ENV NVM_DIR /home/uxbox/.nvm
-ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
-ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+ENV NVM_DIR=/home/uxbox/.nvm \
+    NODE_PATH=$NVM_DIR/v$NODE_VERSION/lib/node_modules \
+    PATH=$NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
