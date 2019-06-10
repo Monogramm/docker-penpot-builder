@@ -13,6 +13,7 @@ RUN set -ex; \
     apt-get update -yq &&  \
     apt-get install -yq \
         bash \
+        curl \
         git \
         openjdk-8-jdk \
         rlwrap \
