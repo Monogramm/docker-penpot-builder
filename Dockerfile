@@ -1,5 +1,6 @@
 FROM ubuntu:bionic
-LABEL maintainer="mathieu.brunot at monogramm dot io"
+
+LABEL maintainer="Monogramm Maintainers <opensource at monogramm dot io>"
 
 RUN set -ex; \
     apt-get update && \
@@ -40,11 +41,14 @@ RUN set -ex; \
 
 WORKDIR /home/uxbox
 
-ENV NODE_VERSION=8.15.0
+ENV NODE_VERSION=10.16.0 \
+    CLOJURE_VERSION=1.10.0.442
 
-COPY lein /home/uxbox/.local/bin/lein
 RUN set -ex; \
-	chmod 755 /home/uxbox/.local/bin/lein; \
+    wget "https://download.clojure.org/install/linux-install-$CLOJURE_VERSION.sh"; \
+    chmod +x "linux-install-$CLOJURE_VERSION.sh"; \
+    "./linux-install-$CLOJURE_VERSION.sh"; \
+    rm -rf "linux-install-$CLOJURE_VERSION.sh"; \
     git clone https://github.com/creationix/nvm.git .nvm; \
     bash -c "source .nvm/nvm.sh && nvm install $NODE_VERSION"; \
     bash -c "source .nvm/nvm.sh && nvm alias default $NODE_VERSION"; \
