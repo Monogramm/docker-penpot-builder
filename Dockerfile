@@ -24,8 +24,6 @@ RUN set -ex; \
     mkdir -p /etc/resolvconf/resolv.conf.d; \
     echo "nameserver 8.8.8.8" > /etc/resolvconf/resolv.conf.d/tail
 
-WORKDIR /home/uxbox
-
 # Clojure
 ENV CLOJURE_VERSION=1.10.0.442
 RUN set -ex; \
@@ -42,6 +40,9 @@ RUN set -ex; \
     bash -c "/home/uxbox/.local/bin/lein version"
 
 # Node
+USER uxbox
+WORKDIR /home/uxbox
+
 ENV NODE_VERSION=10.16.0
 RUN set -ex; \
     git clone https://github.com/creationix/nvm.git .nvm; \
@@ -55,5 +56,6 @@ ENV NVM_DIR=/home/uxbox/.nvm \
 
 COPY files/bashrc /home/uxbox/.bashrc
 COPY files/zshrc /home/uxbox/.zshrc
+
 RUN set -ex; \
     bash -c "npm --version"
