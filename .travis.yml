@@ -17,7 +17,7 @@ before_script:
   - dir="."
 
 script:
-  - travis_wait 50 docker build -t "$image" "$dir"
+  - travis_retry docker build -t "$image" "$dir"
 
 after_script:
   - docker images
