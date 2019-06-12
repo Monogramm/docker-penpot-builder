@@ -33,6 +33,10 @@ RUN set -ex; \
     rm -rf clojure-linux-install.sh; \
     clojure -h
 
+
+USER uxbox
+WORKDIR /home/uxbox
+
 # Leiningen
 COPY files/lein /home/uxbox/.local/bin/lein
 RUN set -ex; \
@@ -40,15 +44,12 @@ RUN set -ex; \
     bash -c "/home/uxbox/.local/bin/lein version"
 
 # Node
-USER uxbox
-WORKDIR /home/uxbox
-
 ENV NODE_VERSION=10.16.0
 RUN set -ex; \
-    git clone https://github.com/creationix/nvm.git .nvm; \
-    bash -c "source .nvm/nvm.sh && nvm install $NODE_VERSION"; \
-    bash -c "source .nvm/nvm.sh && nvm alias default $NODE_VERSION"; \
-    bash -c "source .nvm/nvm.sh && nvm use default"
+    git clone https://github.com/creationix/nvm.git /home/uxbox/.nvm; \
+    bash -c "source /home/uxbox/.nvm/nvm.sh && nvm install $NODE_VERSION"; \
+    bash -c "source /home/uxbox/.nvm/nvm.sh && nvm alias default $NODE_VERSION"; \
+    bash -c "source /home/uxbox/.nvm/nvm.sh && nvm use default"
 
 ENV NVM_DIR=/home/uxbox/.nvm \
     NODE_PATH=$NVM_DIR/v$NODE_VERSION/lib/node_modules \
@@ -58,4 +59,7 @@ COPY files/bashrc /home/uxbox/.bashrc
 COPY files/zshrc /home/uxbox/.zshrc
 
 RUN set -ex; \
+    bash -c "java -version"; \
+    bash -c "clojure -h"; \
+    bash -c "lein version"; \
     bash -c "npm --version"
