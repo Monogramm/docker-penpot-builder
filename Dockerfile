@@ -26,6 +26,8 @@ RUN set -ex; \
     mkdir -p /etc/resolvconf/resolv.conf.d; \
     echo "nameserver 8.8.8.8" > /etc/resolvconf/resolv.conf.d/tail
 
+WORKDIR /home/uxbox
+
 # Clojure
 ENV CLOJURE_VERSION=1.10.0.442
 RUN set -ex; \
@@ -34,15 +36,6 @@ RUN set -ex; \
     ./clojure-linux-install.sh; \
     rm -rf clojure-linux-install.sh; \
     clojure -h
-
-# Init uxbox user
-RUN set -ex; \
-    useradd -m -g users -s /bin/zsh -u $EXTERNAL_UID uxbox; \
-    passwd uxbox -d; \
-    echo "uxbox ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-
-USER uxbox
-WORKDIR /home/uxbox
 
 # Leiningen
 COPY files/lein /home/uxbox/.local/bin/lein
@@ -62,9 +55,16 @@ ENV NVM_DIR=/home/uxbox/.nvm \
     NODE_PATH=$NVM_DIR/v$NODE_VERSION/lib/node_modules \
     PATH=$HOME/.local/bin:$NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
+# Init uxbox user
+RUN set -ex; \
+    useradd -m -g users -s /bin/zsh -u $EXTERNAL_UID uxbox; \
+    passwd uxbox -d; \
+    echo "uxbox ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
 COPY files/bashrc /home/uxbox/.bashrc
 COPY files/zshrc /home/uxbox/.zshrc
 
+USER uxbox
 RUN set -ex; \
     bash -c "java -version"; \
     bash -c "clojure -h"; \
