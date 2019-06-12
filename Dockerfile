@@ -15,6 +15,7 @@ RUN set -ex; \
         locales \
         openjdk-8-jdk \
         rlwrap \
+        rsync \
         sudo \
         webp \
         zsh \
@@ -44,7 +45,10 @@ RUN set -ex; \
 
 ENV NVM_DIR=/home/uxbox/.nvm \
     NODE_PATH=$NVM_DIR/v$NODE_VERSION/lib/node_modules \
-    PATH=$NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+    PATH=$HOME/.local/bin:$NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+
+RUN set -ex; \
+    npm --version
 
 # Leiningen
 COPY lein /home/uxbox/.local/bin/lein
