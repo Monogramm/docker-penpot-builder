@@ -48,7 +48,6 @@ ENV NVM_DIR=/home/uxbox/.nvm \
     PATH=$HOME/.local/bin:$NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 RUN set -ex; \
-    which npm; \
     bash -c "npm --version"
 
 # Leiningen
