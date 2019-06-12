@@ -40,8 +40,7 @@ RUN set -ex; \
 # Leiningen
 COPY files/lein /home/uxbox/.local/bin/lein
 RUN set -ex; \
-    chmod 755 /home/uxbox/.local/bin/lein; \
-    bash -c "/home/uxbox/.local/bin/lein version"
+    chmod 755 /home/uxbox/.local/bin/lein
 
 # Node
 ENV NODE_VERSION=10.16.0
@@ -68,5 +67,5 @@ USER uxbox
 RUN set -ex; \
     bash -c "java -version"; \
     bash -c "clojure -h"; \
-    bash -c "lein version"; \
+    bash -c "/home/uxbox/.local/bin/lein version"; \
     bash -c "npm --version"
