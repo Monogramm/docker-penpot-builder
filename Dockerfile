@@ -36,7 +36,7 @@ RUN set -ex; \
     clojure -h
 
 # Leiningen
-COPY lein /home/uxbox/.local/bin/lein
+COPY files/lein /home/uxbox/.local/bin/lein
 RUN set -ex; \
     chmod 755 /home/uxbox/.local/bin/lein; \
     bash -c "/home/uxbox/.local/bin/lein version"

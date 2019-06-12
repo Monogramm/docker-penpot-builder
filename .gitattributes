@@ -12,6 +12,8 @@
 *.yml text eol=lf
 Dockerfile text eol=lf
 lein text eol=lf
+bashrc text eol=lf
+zshrc text eol=lf
 
 # Ensure those won't be messed up with
 *.jpg binary
