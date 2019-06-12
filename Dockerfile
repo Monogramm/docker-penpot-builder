@@ -2,6 +2,8 @@ FROM ubuntu:bionic
 
 LABEL maintainer="Monogramm Maintainers <opensource at monogramm dot io>"
 
+ARG EXTERNAL_UID=1000
+
 # Packages
 RUN set -ex; \
     apt-get update -yq &&  \
