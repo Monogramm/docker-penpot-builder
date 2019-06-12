@@ -33,6 +33,11 @@ RUN set -ex; \
     rm -rf clojure-linux-install.sh; \
     clojure -h
 
+# Init uxbox user
+RUN set -ex; \
+    useradd -m -g users -s /bin/zsh -u $EXTERNAL_UID uxbox; \
+    passwd uxbox -d; \
+    echo "uxbox ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 USER uxbox
 WORKDIR /home/uxbox
