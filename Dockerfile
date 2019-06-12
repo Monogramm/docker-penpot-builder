@@ -35,6 +35,12 @@ RUN set -ex; \
     rm -rf clojure-linux-install.sh; \
     clojure -h
 
+# Leiningen
+COPY lein /home/uxbox/.local/bin/lein
+RUN set -ex; \
+    chmod 755 /home/uxbox/.local/bin/lein; \
+    bash -c "/home/uxbox/.local/bin/lein version"
+
 # Node
 ENV NODE_VERSION=10.16.0
 RUN set -ex; \
@@ -47,11 +53,7 @@ ENV NVM_DIR=/home/uxbox/.nvm \
     NODE_PATH=$NVM_DIR/v$NODE_VERSION/lib/node_modules \
     PATH=$HOME/.local/bin:$NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
+COPY files/bashrc /home/uxbox/.bashrc
+COPY files/zshrc /home/uxbox/.zshrc
 RUN set -ex; \
     bash -c "npm --version"
-
-# Leiningen
-COPY lein /home/uxbox/.local/bin/lein
-RUN set -ex; \
-    chmod 755 /home/uxbox/.local/bin/lein; \
-    bash -c "/home/uxbox/.local/bin/lein version"
