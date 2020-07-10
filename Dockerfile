@@ -2,12 +2,6 @@ FROM clojure:openjdk-11-tools-deps-1.10.1.547-slim-buster
 
 LABEL maintainer="Monogramm Maintainers <opensource at monogramm dot io>"
 
-ARG EXTERNAL_UID=1000
-
-RUN set -ex; \
-    useradd -m -g users -s /bin/zsh -u $EXTERNAL_UID uxbox; \
-    passwd uxbox -d; \
-    echo "uxbox ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 ENV LANG=en_US.UTF-8 \
     LC_ALL=C.UTF-8
@@ -25,7 +19,6 @@ RUN set -ex; \
         locales \
         rlwrap \
         rsync \
-        sudo \
         webp \
         wget \
         zsh \
@@ -43,6 +36,13 @@ RUN set -ex; \
         nodejs \
         yarn
 
+
+ARG EXTERNAL_UID=1000
+
+RUN set -ex; \
+    useradd -m -g users -s /bin/zsh -u $EXTERNAL_UID uxbox; \
+    passwd uxbox -d; \
+    echo "uxbox ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 USER uxbox
 WORKDIR /home/uxbox
