@@ -6,6 +6,9 @@ LABEL maintainer="Monogramm Maintainers <opensource at monogramm dot io>"
 ENV LANG=en_US.UTF-8 \
     LC_ALL=C.UTF-8
 
+
+ARG EXTERNAL_UID=1000
+
 # Packages
 RUN set -ex; \
     apt-get update -yq &&  \
@@ -35,17 +38,6 @@ RUN set -ex; \
     apt-get update  -yq ; \
     apt-get install -yq nodejs; \
     apt-get install -yq yarn
-
-
-ARG EXTERNAL_UID=1000
-
-RUN set -ex; \
-    useradd -m -g users -s /bin/zsh -u $EXTERNAL_UID uxbox; \
-    passwd uxbox -d; \
-    echo "uxbox ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-
-USER uxbox
-WORKDIR /home/uxbox
 
 
 RUN node -v; \
