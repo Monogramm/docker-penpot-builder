@@ -29,12 +29,12 @@ RUN set -ex; \
 
 # Nodejs and yarn
 RUN set -ex; \
-    curl -sL https://deb.nodesource.com/setup_12.x | bash -
-
-RUN set -ex; \
-    apt-get install -yq \
-        nodejs \
-        yarn
+    curl -sL https://deb.nodesource.com/setup_12.x | bash - ;\
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - ;\
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list; \
+    apt-get update  -yq ; \
+    apt-get install -yq nodejs; \
+    apt-get install -yq yarn
 
 
 ARG EXTERNAL_UID=1000
